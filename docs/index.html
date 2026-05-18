@@ -241,6 +241,106 @@
       margin-top: 20px;
     }
 
+    /* ── Recommendation Section ── */
+    .rec-outlook {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .rec-outlook.bearish { border-left: 4px solid var(--red); }
+    .rec-outlook.bullish { border-left: 4px solid var(--green); }
+    .rec-outlook.neutral-out { border-left: 4px solid var(--yellow); }
+    .rec-direction { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .rec-summary { font-size: 12px; color: var(--muted); max-width: 520px; line-height: 1.6; }
+    .rec-target { font-size: 12px; margin-top: 6px; }
+
+    .rec-top3-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .rec-top3-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .rec-rank { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .rec-stock-name { font-size: 16px; font-weight: 700; }
+    .rec-stock-sym { font-size: 12px; color: var(--muted); margin-left: 6px; }
+    .rec-score { font-size: 12px; margin-top: 6px; }
+    .rec-entry { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .rec-reason { font-size: 12px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); line-height: 1.5; }
+
+    .rec-no-trade {
+      background: rgba(245,158,11,.08);
+      border: 1px solid rgba(245,158,11,.3);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--yellow);
+    }
+
+    .rec-action-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+    .rec-action-card.high { border-left: 4px solid var(--red); }
+    .rec-action-card.medium { border-left: 4px solid var(--yellow); }
+    .rec-action-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+    .rec-action-alerts { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+    .rec-action-alert { font-size: 12px; padding: 5px 10px; background: var(--bg3); border-radius: 5px; }
+    .scenario-table { width: 100%; border-collapse: collapse; }
+    .scenario-table td {
+      padding: 7px 10px;
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .scenario-table tr:first-child td { border-top: none; }
+    .scenario-condition { color: var(--muted); width: 42%; }
+
+    .r47-banner {
+      background: rgba(99,102,241,.1);
+      border: 1px solid rgba(99,102,241,.35);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .dram-banner {
+      background: rgba(239,68,68,.08);
+      border: 1px solid rgba(239,68,68,.25);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .rec-date-badge {
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--bg3);
+      padding: 2px 8px;
+      border-radius: 9999px;
+      margin-left: 8px;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 600px) {
       header { padding: 12px 16px; }
@@ -476,20 +576,147 @@ function renderGlobal(data) {
     </div>
   </section>`;
 
-  app.innerHTML = html;
+  app.innerHTML += html;
+}
+
+// ── 盤前分析渲染 ──────────────────────────────────────────────
+function renderRecommendations(rec) {
+  if (!rec) return "";
+  const { _meta, marketOutlook, r47Alert, dram, top3, noTradeReason,
+          watchForRebound, portfolioActions, keyIndicators } = rec;
+
+  let html = `
+  <section>
+    <div class="section-title">
+      📋 盤前分析
+      <span class="rec-date-badge">${_meta?.date || ""}</span>
+      <span class="rec-date-badge" style="color:var(--accent)">${_meta?.modelVersion || ""}</span>
+    </div>`;
+
+  // ── 市場方向 ──
+  const dirColor = marketOutlook?.directionColor === "red" ? "bearish"
+                 : marketOutlook?.directionColor === "green" ? "bullish" : "neutral-out";
+  const dirTextColor = marketOutlook?.directionColor === "red" ? "var(--red)"
+                     : marketOutlook?.directionColor === "green" ? "var(--green)" : "var(--yellow)";
+  html += `
+    <div class="rec-outlook ${dirColor}">
+      <div>
+        <div class="rec-direction" style="color:${dirTextColor}">${marketOutlook?.direction || "–"}</div>
+        <div class="rec-summary">${marketOutlook?.summary || ""}</div>
+        ${marketOutlook?.indexTarget ? `<div class="rec-target">🎯 ${marketOutlook.indexTarget}</div>` : ""}
+        ${marketOutlook?.operationMode ? `<div class="rec-target" style="color:var(--muted)">🛡️ ${marketOutlook.operationMode}</div>` : ""}
+      </div>
+      ${keyIndicators ? `
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end">
+        ${Object.entries(keyIndicators).map(([k, v]) => {
+          const cc = v.value > 0 ? "pos" : v.value < 0 ? "neg" : "neutral";
+          return `<div style="text-align:center;min-width:52px">
+            <div style="font-size:10px;color:var(--muted)">${v.label}</div>
+            <div class="${cc}" style="font-size:13px;font-weight:700">${v.value > 0 ? "+" : ""}${v.value}%</div>
+          </div>`;
+        }).join("")}
+      </div>` : ""}
+    </div>`;
+
+  // ── R47 警戒 ──
+  if (r47Alert) {
+    html += `<div class="r47-banner">
+      <span>⚡</span>
+      <div><strong>R47 警戒</strong>：${r47Alert}</div>
+    </div>`;
+  }
+
+  // ── DRAM 族群警報 ──
+  if (dram?.triggered) {
+    html += `<div class="dram-banner">
+      🔴 <strong>DRAM 族群信號 ${dram.signal}</strong>：${dram.detail}
+      ${dram.avoid?.length ? `<br>⛔ 迴避標的：<strong>${dram.avoid.join("、")}</strong>` : ""}
+    </div>`;
+  }
+
+  // ── Top 3 推薦 ──
+  if (top3 && top3.length > 0) {
+    html += `<div class="rec-top3-grid">`;
+    for (const s of top3) {
+      html += `
+      <div class="rec-top3-card">
+        <div class="rec-rank">#${s.rank} 推薦</div>
+        <div>
+          <span class="rec-stock-name">${s.name}</span>
+          <span class="rec-stock-sym">${s.symbol}</span>
+          <span class="badge badge-blue" style="margin-left:6px">${s.score}</span>
+        </div>
+        ${s.entryZone ? `<div class="rec-entry">📍 進場區 ${s.entryZone}　停損 ${s.stopLoss}</div>` : ""}
+        ${s.reason ? `<div class="rec-reason">${s.reason}</div>` : ""}
+        ${(s.warnings || []).length > 0 ? `<div style="margin-top:6px">${s.warnings.map(w => `<div class="alert-item" style="font-size:11px;margin-top:3px">${w}</div>`).join("")}</div>` : ""}
+      </div>`;
+    }
+    html += `</div>`;
+  } else if (noTradeReason) {
+    html += `<div class="rec-no-trade">🚫 今日不開新倉<br>${noTradeReason}</div>`;
+  }
+
+  // ── 反彈觀察 ──
+  if (watchForRebound && watchForRebound.length > 0) {
+    html += `<div style="margin-top:10px;font-size:12px;color:var(--muted)">
+      👀 反彈觀察：${watchForRebound.map(w => `<strong style="color:var(--text)">${w.name}（${w.symbol}）</strong> — ${w.note}`).join("；")}
+    </div>`;
+  }
+
+  // ── 庫存操作建議 ──
+  if (portfolioActions && portfolioActions.length > 0) {
+    html += `<div style="margin-top:16px"><div class="section-title" style="margin-bottom:8px">庫存操作建議</div>`;
+    for (const pa of portfolioActions) {
+      html += `
+      <div class="rec-action-card ${pa.urgency}">
+        <div class="rec-action-title">
+          ${pa.urgency === "high" ? "🔴" : pa.urgency === "medium" ? "🟡" : "⚪"}
+          ${pa.name} <span style="font-size:12px;color:var(--muted);font-weight:400">${pa.symbol}</span>
+          <span class="badge ${pa.urgency === 'high' ? 'badge-red' : 'badge-yellow'}" style="margin-left:8px">
+            ${pa.urgency === 'high' ? '高優先' : '注意'}
+          </span>
+        </div>`;
+      if (pa.alerts && pa.alerts.length > 0) {
+        html += `<div class="rec-action-alerts">${pa.alerts.map(a => `<div class="rec-action-alert">${a}</div>`).join("")}</div>`;
+      }
+      if (pa.scenarios && pa.scenarios.length > 0) {
+        html += `<table class="scenario-table">`;
+        for (const sc of pa.scenarios) {
+          html += `<tr>
+            <td class="scenario-condition">📌 ${sc.condition}</td>
+            <td>${sc.action}</td>
+          </tr>`;
+        }
+        html += `</table>`;
+      }
+      html += `</div>`;
+    }
+    html += `</div>`;
+  }
+
+  html += `</section>`;
+  return html;
 }
 
 // ── 主程式 ───────────────────────────────────────────────────
 async function main() {
   try {
-    // 嘗試載入 latest.json
-    const res = await fetch("data/latest.json?t=" + Date.now());
+    // 並行載入 latest.json 和 recommendations.json
+    const [res, recRes] = await Promise.all([
+      fetch("data/latest.json?t=" + Date.now()),
+      fetch("data/recommendations.json?t=" + Date.now()).catch(() => null),
+    ]);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
+    const rec = recRes?.ok ? await recRes.json() : null;
 
     document.getElementById("loading").style.display = "none";
     document.getElementById("app").style.display = "block";
-    renderGlobal(data);
+
+    // 先插入盤前分析（若有），再渲染持倉
+    const recHtml = renderRecommendations(rec);
+    document.getElementById("app").innerHTML = recHtml;
+    renderGlobal(data);          // 追加到 app
   } catch (err) {
     document.getElementById("loading").innerHTML = `
       <div style="font-size:32px">⚠️</div>

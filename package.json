@@ -7,7 +7,8 @@
     "query": "node query.js",
     "fetch": "node scripts/fetch-data.js",
     "top5": "node query.js 2330.TW 4979.TWO 8358.TWO 2317.TW 3363.TWO",
-    "watch": "node query.js 2337.TW 2408.TW 6770.TW"
+    "watch": "node query.js 2337.TW 2408.TW 6770.TW",
+    "push": "git add docs/data/recommendations.json docs/data/latest.json docs/index.html portfolio.json && git diff --staged --quiet || git commit -m \"📋 Update dashboard data\" && git push"
   },
   "keywords": ["stock", "taiwan", "yahoo-finance"],
   "author": "",

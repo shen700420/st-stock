@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "date": "2026-05-18",
+    "generatedAt": "2026-05-18T08:50:00+08:00",
+    "modelVersion": "V0014補4",
+    "analyst": "ST 台股分析模型"
+  },
+  "marketOutlook": {
+    "direction": "空方主導",
+    "directionColor": "red",
+    "summary": "SOX -4.02%，VIX +6.78% 恐慌升溫，NQ期指 -0.80%，週末無重大正面事件",
+    "indexTarget": "加權指數預計低開 -1.5%~-2.5%（約 40,100~40,600）",
+    "operationMode": "高度保守，持現為主，專注庫存風控"
+  },
+  "r47Alert": null,
+  "dram": {
+    "triggered": true,
+    "signal": "負向",
+    "detail": "MU -6.62% vs SOX -4.02%，族群信號比率 1.65 倍（反向）→ DRAM 族群特定利空",
+    "avoid": ["6770.TW", "2408.TW", "2344.TW", "2337.TW"]
+  },
+  "top3": [],
+  "noTradeReason": "空方環境（SOX -4.02%，VIX 18.43 升溫），D1 宏觀評分=0，所有候選標的最高估分 ≤3/12，遠低於進場門檻 8/12。建議今日持現觀望，不新開部位。",
+  "watchForRebound": [
+    {
+      "symbol": "2303.TW",
+      "name": "聯電",
+      "note": "5/15 相對抗跌（+1.85%），若盤中跌幅縮窄可列逆向觀察"
+    }
+  ],
+  "portfolioActions": [
+    {
+      "symbol": "6770.TW",
+      "name": "力積電",
+      "urgency": "high",
+      "alerts": [
+        "🔴 R24 出貨型警戒（5/15 高67→收62.8，爆量356M）",
+        "🔴 R45：MU -6.62%，DRAM 族群特定利空"
+      ],
+      "scenarios": [
+        { "condition": "開盤跌破 62", "action": "🔴 立即縮倉新加碼2張，執行停損 @60.71" },
+        { "condition": "開盤 62~63 整理", "action": "🟡 等15分鐘確認（R27），走弱仍縮倉" },
+        { "condition": "開盤跳空高開 ≥64", "action": "🟢 暫緩縮倉，確認15分鐘走勢" },
+        { "condition": "跌破均價停損 57.81", "action": "🔴 R02 強制全出，無例外" }
+      ]
+    }
+  ],
+  "keyIndicators": {
+    "SOX":  { "value": -4.02, "label": "費半" },
+    "VIX":  { "value": 18.43, "label": "VIX" },
+    "TSM":  { "value": -3.20, "label": "台積電ADR" },
+    "MU":   { "value": -6.62, "label": "美光MU" },
+    "SNDK": { "value": 1.80,  "label": "SanDisk" },
+    "NVDA": { "value": -4.42, "label": "NVIDIA" },
+    "NQ":   { "value": -0.80, "label": "那指期指" }
+  }
+}
