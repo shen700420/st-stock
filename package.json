@@ -1,0 +1,19 @@
+{
+  "name": "stock-api",
+  "version": "1.0.0",
+  "description": "台股收盤價即時查詢（Stock.md V0007 數據驗證專用）",
+  "main": "query.js",
+  "scripts": {
+    "query": "node query.js",
+    "fetch": "node scripts/fetch-data.js",
+    "top5": "node query.js 2330.TW 4979.TWO 8358.TWO 2317.TW 3363.TWO",
+    "watch": "node query.js 2337.TW 2408.TW 6770.TW"
+  },
+  "keywords": ["stock", "taiwan", "yahoo-finance"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "yahoo-finance2": "^3.14.0"
+  }
+}

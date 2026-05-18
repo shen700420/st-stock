@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ST 台股追蹤儀表板</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --bg2: #1a1d27;
+      --bg3: #22263a;
+      --border: #2e3250;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --blue: #3b82f6;
+      --accent: #6366f1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    header h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+    header h1 span { color: var(--accent); }
+    .update-info { font-size: 12px; color: var(--muted); }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-green { background: rgba(34,197,94,.15); color: var(--green); }
+    .badge-red { background: rgba(239,68,68,.15); color: var(--red); }
+    .badge-yellow { background: rgba(245,158,11,.15); color: var(--yellow); }
+    .badge-blue { background: rgba(59,130,246,.15); color: var(--blue); }
+
+    /* ── Main Layout ── */
+    main { max-width: 1280px; margin: 0 auto; padding: 20px 16px; }
+
+    /* ── Section ── */
+    section { margin-bottom: 24px; }
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: 12px;
+      padding-left: 2px;
+    }
+
+    /* ── Summary Cards ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .card-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .card-value { font-size: 22px; font-weight: 700; line-height: 1; }
+    .card-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .pos { color: var(--green); }
+    .neg { color: var(--red); }
+    .neutral { color: var(--text); }
+
+    /* ── Position Card ── */
+    .position-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+    .position-card.has-alert { border-color: rgba(245,158,11,.5); }
+    .position-card.danger { border-color: rgba(239,68,68,.5); }
+
+    .pos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .pos-name { font-size: 18px; font-weight: 700; }
+    .pos-symbol { font-size: 12px; color: var(--muted); margin-left: 8px; }
+    .pos-price { text-align: right; }
+    .pos-price-main { font-size: 26px; font-weight: 700; }
+    .pos-price-change { font-size: 13px; }
+
+    .pos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .pos-stat label { font-size: 11px; color: var(--muted); display: block; margin-bottom: 3px; }
+    .pos-stat span { font-size: 14px; font-weight: 600; }
+
+    /* 停損進度條 */
+    .stopbar-wrap { margin-top: 10px; }
+    .stopbar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .stopbar-track {
+      height: 6px;
+      background: var(--bg3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stopbar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width .4s ease;
+    }
+
+    /* 警示列表 */
+    .alerts { margin-top: 12px; display: flex; flex-direction: column; gap: 4px; }
+    .alert-item {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: var(--bg3);
+    }
+
+    /* ── Table ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg2);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .data-table th {
+      background: var(--bg3);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+    }
+    .data-table td {
+      padding: 10px 14px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .data-table tr:hover td { background: rgba(255,255,255,.02); }
+    .text-right { text-align: right; }
+    .text-mono { font-variant-numeric: tabular-nums; }
+
+    /* ── Global Indicators Grid ── */
+    .indicator-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    .indicator-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .ind-name { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .ind-price { font-size: 18px; font-weight: 700; }
+    .ind-change { font-size: 12px; }
+
+    /* ── Alert Banner ── */
+    .alert-banner {
+      background: rgba(239,68,68,.1);
+      border: 1px solid rgba(239,68,68,.3);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .alert-banner .icon { font-size: 18px; }
+
+    /* ── Loading ── */
+    #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      gap: 12px;
+      color: var(--muted);
+    }
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      header { padding: 12px 16px; }
+      main { padding: 14px 12px; }
+      .pos-price-main { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📈 <span>ST</span> 台股追蹤儀表板</h1>
+  <div class="update-info" id="updateInfo">載入中…</div>
+</header>
+
+<main>
+  <div id="loading">
+    <div class="spinner"></div>
+    <div>載入最新數據…</div>
+  </div>
+  <div id="app" style="display:none"></div>
+</main>
+
+<footer>
+  ST 台股追蹤系統 V0014補4 ｜ 數據來源：TWSE 官方 + Yahoo Finance ｜ 僅供個人參考，不構成投資建議
+</footer>
+
+<script>
+// ── 輔助函數 ─────────────────────────────────────────────────
+const fmt = {
+  price:   (v, d=2) => v == null ? "–" : Number(v).toFixed(d),
+  pct:     (v)      => v == null ? "–" : `${v >= 0 ? "+" : ""}${Number(v).toFixed(2)}%`,
+  money:   (v)      => v == null ? "–" : `NT$${Math.round(v).toLocaleString()}`,
+  vol:     (v)      => v == null ? "–" : Number(v).toLocaleString(),
+  date:    (iso)    => {
+    if (!iso) return "–";
+    try {
+      const d = new Date(iso);
+      return d.toLocaleString("zh-TW", { timeZone: "Asia/Taipei",
+        month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit" });
+    } catch { return iso; }
+  },
+};
+
+const colorClass = (v) => v > 0 ? "pos" : v < 0 ? "neg" : "neutral";
+
+// 停損距離百分比（0=已停損, 100=距停損很遠）
+function stopBarPct(price, stopLoss) {
+  if (!price || !stopLoss) return 0;
+  const range = price * 0.15; // 以當前價15%為顯示範圍
+  const dist = price - stopLoss;
+  return Math.min(100, Math.max(0, (dist / range) * 100));
+}
+function stopBarColor(pct) {
+  if (pct < 20) return "#ef4444";
+  if (pct < 40) return "#f59e0b";
+  return "#22c55e";
+}
+
+// ── 渲染函數 ─────────────────────────────────────────────────
+function renderGlobal(data) {
+  const app = document.getElementById("app");
+  const { summary, positions, watchlist, globalIndicators, _meta } = data;
+
+  // 更新 header 時間
+  document.getElementById("updateInfo").textContent =
+    `最後更新：${fmt.date(_meta.updatedAt)}（${_meta.version}）`;
+
+  let html = "";
+
+  // ── 警示橫幅 ──────────────────────────────────────────────
+  const criticalAlerts = positions.flatMap(p =>
+    (p.alerts || []).filter(a => a.startsWith("🔴"))
+  );
+  if (criticalAlerts.length > 0) {
+    html += `<div class="alert-banner">
+      <span class="icon">🚨</span>
+      <div>
+        <strong>緊急警示（${criticalAlerts.length}）</strong>
+        <div style="font-size:12px;margin-top:3px">${criticalAlerts.join(" ／ ")}</div>
+      </div>
+    </div>`;
+  }
+
+  // ── 總覽卡片 ───────────────────────────────────────────────
+  const pnlClass = colorClass(summary.totalPnl);
+  html += `
+  <section>
+    <div class="section-title">持倉總覽</div>
+    <div class="summary-grid">
+      <div class="card">
+        <div class="card-label">總市值</div>
+        <div class="card-value neutral">${fmt.money(summary.totalMarketValue)}</div>
+        <div class="card-sub">成本 ${fmt.money(summary.totalCostValue)}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">浮動損益</div>
+        <div class="card-value ${pnlClass}">${summary.totalPnl >= 0 ? "+" : ""}${fmt.money(summary.totalPnl)}</div>
+        <div class="card-sub ${pnlClass}">${fmt.pct(summary.totalPnlPercent)}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">持倉檔數</div>
+        <div class="card-value neutral">${summary.positionCount}</div>
+        <div class="card-sub">${summary.hasAlerts ? '<span class="badge badge-yellow">有警示</span>' : '<span class="badge badge-green">正常</span>'}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">數據日期</div>
+        <div class="card-value neutral" style="font-size:16px">${_meta.dataDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")}</div>
+        <div class="card-sub">TWSE / Yahoo Finance</div>
+      </div>
+    </div>
+  </section>`;
+
+  // ── 持倉明細 ───────────────────────────────────────────────
+  html += `<section><div class="section-title">當前持倉</div>`;
+  if (positions.length === 0) {
+    html += `<div class="card" style="color:var(--muted);text-align:center;padding:30px">目前無持倉</div>`;
+  }
+  for (const p of positions) {
+    const hasRed = (p.alerts || []).some(a => a.startsWith("🔴"));
+    const hasYellow = (p.alerts || []).some(a => a.startsWith("🟡"));
+    const cardClass = hasRed ? "danger" : hasYellow ? "has-alert" : "";
+    const pnlC = colorClass(p.pnl);
+    const chgC = colorClass(p.changePercent);
+    const barPct = stopBarPct(p.price, p.stopLoss);
+    const barColor = stopBarColor(barPct);
+
+    html += `
+    <div class="position-card ${cardClass}">
+      <div class="pos-header">
+        <div>
+          <span class="pos-name">${p.name}</span>
+          <span class="pos-symbol">${p.symbol}</span>
+          ${p.dataDate ? `<span class="badge badge-blue" style="margin-left:8px">${p.dataDate}</span>` : ""}
+        </div>
+        <div class="pos-price">
+          <div class="pos-price-main ${chgC}">${fmt.price(p.price)}</div>
+          <div class="pos-price-change ${chgC}">${fmt.pct(p.changePercent)} (${p.change >= 0 ? "+" : ""}${fmt.price(p.change)})</div>
+        </div>
+      </div>
+
+      <div class="pos-grid">
+        <div class="pos-stat"><label>持股數</label><span>${p.shares?.toLocaleString()} 股</span></div>
+        <div class="pos-stat"><label>均攤成本</label><span>${fmt.price(p.costPerShare)}</span></div>
+        <div class="pos-stat"><label>市值</label><span>${fmt.money(p.marketValue)}</span></div>
+        <div class="pos-stat"><label>浮動損益</label><span class="${pnlC}">${p.pnl >= 0 ? "+" : ""}${fmt.money(p.pnl)}</span></div>
+        <div class="pos-stat"><label>損益%</label><span class="${pnlC}">${fmt.pct(p.pnlPercent)}</span></div>
+        <div class="pos-stat"><label>開盤</label><span>${fmt.price(p.open)}</span></div>
+        <div class="pos-stat"><label>最高</label><span>${fmt.price(p.high)}</span></div>
+        <div class="pos-stat"><label>最低</label><span>${fmt.price(p.low)}</span></div>
+      </div>
+
+      <div class="stopbar-wrap">
+        <div class="stopbar-label">
+          <span>停損線 ${fmt.price(p.stopLoss)} ← 距離 ${p.price && p.stopLoss ? fmt.price(p.price - p.stopLoss) : "–"} 元</span>
+          ${p.alertStopLoss ? `<span>⚠️ 警戒線 ${fmt.price(p.alertStopLoss)}</span>` : ""}
+        </div>
+        <div class="stopbar-track">
+          <div class="stopbar-fill" style="width:${barPct}%;background:${barColor}"></div>
+        </div>
+      </div>
+
+      ${(p.alerts || []).length > 0 ? `
+      <div class="alerts">
+        ${p.alerts.map(a => `<div class="alert-item">${a}</div>`).join("")}
+      </div>` : ""}
+
+      ${p.notes ? `<div style="font-size:11px;color:var(--muted);margin-top:8px">📝 ${p.notes}</div>` : ""}
+    </div>`;
+  }
+  html += `</section>`;
+
+  // ── 全球指標 ───────────────────────────────────────────────
+  html += `<section><div class="section-title">全球指標</div><div class="indicator-grid">`;
+  const nameMap = {
+    "^TWII":"加權指數","TSM":"台積電ADR","MU":"美光MU","SNDK":"SanDisk",
+    "NVDA":"NVIDIA","^SOX":"費半SOX","^VIX":"VIX恐慌","NQ=F":"那指期指",
+  };
+  for (const ind of globalIndicators) {
+    const cc = colorClass(ind.changePercent);
+    const name = nameMap[ind.symbol] || ind.symbol;
+    html += `
+    <div class="indicator-card">
+      <div class="ind-name">${name}</div>
+      ${ind.error
+        ? `<div style="color:var(--muted);font-size:12px">無法取得</div>`
+        : `<div class="ind-price ${cc}">${fmt.price(ind.price, ind.price > 1000 ? 0 : 2)}</div>
+           <div class="ind-change ${cc}">${fmt.pct(ind.changePercent)}</div>`
+      }
+    </div>`;
+  }
+  html += `</div></section>`;
+
+  // ── 觀察清單 ───────────────────────────────────────────────
+  const watchNameMap = {
+    "2330.TW":"台積電","2303.TW":"聯電","2408.TW":"南亞科",
+    "2344.TW":"華邦電","2337.TW":"旺宏","6770.TW":"力積電",
+    "2317.TW":"鴻海","2454.TW":"聯發科","2357.TW":"華碩",
+  };
+  html += `
+  <section>
+    <div class="section-title">觀察清單</div>
+    <div style="overflow-x:auto">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>代號</th><th>名稱</th><th class="text-right">收盤</th>
+          <th class="text-right">漲跌</th><th class="text-right">漲跌幅</th>
+          <th class="text-right">開盤</th><th class="text-right">最高</th>
+          <th class="text-right">最低</th><th class="text-right">資料日</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${watchlist.map(w => {
+          const cc = colorClass(w.changePercent);
+          return `<tr>
+            <td><code style="font-size:12px;color:var(--muted)">${w.symbol}</code></td>
+            <td><strong>${watchNameMap[w.symbol] || w.symbol}</strong></td>
+            ${w.error
+              ? `<td colspan="7" style="color:var(--muted)">無法取得</td>`
+              : `<td class="text-right text-mono">${fmt.price(w.price)}</td>
+                 <td class="text-right text-mono ${cc}">${w.change >= 0 ? "+" : ""}${fmt.price(w.change)}</td>
+                 <td class="text-right text-mono ${cc}">${fmt.pct(w.changePercent)}</td>
+                 <td class="text-right text-mono">${fmt.price(w.open)}</td>
+                 <td class="text-right text-mono">${fmt.price(w.high)}</td>
+                 <td class="text-right text-mono">${fmt.price(w.low)}</td>
+                 <td class="text-right" style="font-size:11px;color:var(--muted)">${w.dataDate || "–"}</td>`
+            }
+          </tr>`;
+        }).join("")}
+      </tbody>
+    </table>
+    </div>
+  </section>`;
+
+  app.innerHTML = html;
+}
+
+// ── 主程式 ───────────────────────────────────────────────────
+async function main() {
+  try {
+    // 嘗試載入 latest.json
+    const res = await fetch("data/latest.json?t=" + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    renderGlobal(data);
+  } catch (err) {
+    document.getElementById("loading").innerHTML = `
+      <div style="font-size:32px">⚠️</div>
+      <div>無法載入數據</div>
+      <div style="font-size:12px;max-width:300px;text-align:center">${err.message}</div>
+      <div style="font-size:12px;color:var(--muted)">請確認 GitHub Actions 已成功執行，或手動執行 <code>node scripts/fetch-data.js</code></div>
+    `;
+  }
+}
+
+main();
+</script>
+</body>
+</html>
