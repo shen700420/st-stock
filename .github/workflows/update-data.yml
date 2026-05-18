@@ -2,11 +2,15 @@ name: 📊 Update Stock Data
 
 on:
   schedule:
-    # 台灣時間 下午 2:45（收盤後約1小時），週一至週五
-    # UTC 06:45 = Taipei 14:45 (UTC+8)
-    - cron: '45 6 * * 1-5'
+    # ── 台灣交易時段 9:00–14:40，每 20 分鐘自動抓一次 ──────────
+    # UTC 01:00–06:40 = Taipei 09:00–14:40（週一至週五）
+    - cron: '0,20,40 1,2,3,4,5 * * 1-5'
+    - cron: '0,20,40 6 * * 1-5'      # UTC 06:00/06:20/06:40
 
-  # 允許手動觸發
+    # ── 收盤後最終一次（14:50）──────────────────────────────────
+    - cron: '50 6 * * 1-5'
+
+  # 允許手動觸發（GitHub UI 上直接按 Run）
   workflow_dispatch:
     inputs:
       date:
@@ -18,7 +22,7 @@ jobs:
   fetch-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # 允許 push 數據
+      contents: write
 
     steps:
       - name: ⬇️ Checkout repo
@@ -43,7 +47,6 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/data/latest.json
-          # 有變更才 commit（避免空 commit）
           git diff --staged --quiet || \
             git commit -m "📊 Auto-update $(TZ='Asia/Taipei' date +'%Y-%m-%d %H:%M') (Taipei)"
           git push

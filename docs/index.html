@@ -239,7 +239,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 10px;
+      gap: 8px;
       z-index: 100;
     }
     .fab {
@@ -254,99 +254,43 @@
       font-size: 20px;
       transition: transform .2s, box-shadow .2s;
       box-shadow: 0 4px 16px rgba(0,0,0,.5);
+      background: var(--accent);
+      color: #fff;
     }
-    .fab:hover { transform: scale(1.08); }
-    .fab:active { transform: scale(.95); }
-    .fab-refresh { background: var(--accent); color: #fff; }
-    .fab-refresh.spinning svg { animation: spin .8s linear infinite; }
-    .fab-settings { background: var(--bg2); color: var(--muted); border: 1px solid var(--border); width: 38px; height: 38px; font-size: 16px; }
+    .fab:hover:not(:disabled) { transform: scale(1.08); }
+    .fab:active:not(:disabled) { transform: scale(.95); }
+    .fab:disabled { opacity: .55; cursor: default; }
+    .fab.spinning svg { animation: spin .8s linear infinite; }
     .fab-toast {
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 8px 14px;
+      padding: 7px 12px;
       font-size: 12px;
-      max-width: 220px;
+      max-width: 200px;
       text-align: right;
       pointer-events: none;
       opacity: 0;
-      transform: translateX(10px);
+      transform: translateX(8px);
       transition: opacity .25s, transform .25s;
+      white-space: nowrap;
     }
     .fab-toast.show { opacity: 1; transform: translateX(0); }
     .fab-toast.ok  { color: var(--green); border-color: rgba(34,197,94,.3); }
     .fab-toast.err { color: var(--red);   border-color: rgba(239,68,68,.3); }
     .fab-toast.inf { color: var(--muted); }
-
-    /* ── Token Modal ── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.65);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px 28px 24px;
-      width: min(480px, 92vw);
-      position: relative;
-    }
-    .modal h2 { font-size: 16px; margin-bottom: 6px; }
-    .modal p  { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
-    .modal label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
-    .modal input[type=text], .modal input[type=password] {
-      width: 100%;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      color: var(--text);
-      padding: 9px 12px;
-      font-size: 13px;
-      outline: none;
-      transition: border-color .15s;
-    }
-    .modal input:focus { border-color: var(--accent); }
-    .modal-actions { display: flex; gap: 10px; margin-top: 18px; justify-content: flex-end; }
-    .btn {
-      padding: 8px 18px;
-      border-radius: 7px;
-      border: none;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      transition: opacity .15s;
-    }
-    .btn:hover { opacity: .85; }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-ghost   { background: var(--bg3);    color: var(--text); }
-    .btn-danger  { background: rgba(239,68,68,.15); color: var(--red); }
-    .modal-close {
-      position: absolute;
-      top: 14px; right: 16px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 18px;
-      cursor: pointer;
-      line-height: 1;
-    }
-    .token-status {
+    /* 資料新鮮度 badge */
+    .age-badge {
       font-size: 11px;
-      margin-top: 8px;
-      padding: 6px 10px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      margin-left: 8px;
+      font-weight: 500;
     }
-    .token-status.has-token  { background: rgba(34,197,94,.1);  color: var(--green); }
-    .token-status.no-token   { background: rgba(245,158,11,.1); color: var(--yellow); }
-    .steps { margin: 12px 0; padding-left: 18px; }
-    .steps li { font-size: 12px; color: var(--muted); margin-bottom: 5px; line-height: 1.5; }
-    .steps code { background: var(--bg3); padding: 1px 5px; border-radius: 3px; font-size: 11px; color: var(--text); }
+    .age-fresh  { background: rgba(34,197,94,.12);  color: var(--green); }
+    .age-ok     { background: rgba(59,130,246,.12);  color: var(--blue); }
+    .age-stale  { background: rgba(245,158,11,.12); color: var(--yellow); }
+    .age-old    { background: rgba(239,68,68,.12);  color: var(--red); }
 
     /* ── Footer ── */
     footer {
@@ -470,7 +414,10 @@
 
 <header>
   <h1>📈 <span>ST</span> 台股追蹤儀表板</h1>
-  <div class="update-info" id="updateInfo">載入中…</div>
+  <div class="update-info">
+    <span id="updateInfo">載入中…</span>
+    <span id="ageBadge"></span>
+  </div>
 </header>
 
 <main>
@@ -488,50 +435,13 @@
 <!-- ── 浮動刷新按鈕 ── -->
 <div class="fab-wrap">
   <div class="fab-toast" id="fabToast"></div>
-  <button class="fab fab-settings" id="fabSettings" title="設定 GitHub Token">⚙️</button>
-  <button class="fab fab-refresh" id="fabRefresh" title="立即更新數據">
-    <svg id="refreshIcon" width="22" height="22" viewBox="0 0 24 24" fill="none"
+  <button class="fab" id="fabRefresh" title="重新讀取最新數據">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/>
       <path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>
     </svg>
   </button>
-</div>
-
-<!-- ── GitHub Token 設定 Modal ── -->
-<div class="modal-overlay" id="tokenModal">
-  <div class="modal">
-    <button class="modal-close" id="modalClose">✕</button>
-    <h2>🔑 GitHub Token 設定</h2>
-    <p>
-      需要一組 GitHub Fine-Grained PAT，讓「刷新」按鈕能觸發 Actions 自動抓取最新股價。<br>
-      Token 只存在您的瀏覽器 localStorage，不會上傳至任何伺服器。
-    </p>
-
-    <div id="tokenStatusBadge"></div>
-
-    <details style="margin:12px 0">
-      <summary style="font-size:12px;color:var(--accent);cursor:pointer;user-select:none">
-        📖 如何產生 Token（點擊展開）
-      </summary>
-      <ol class="steps">
-        <li>前往 <strong>GitHub → Settings → Developer settings → Fine-grained tokens</strong></li>
-        <li>點 <code>Generate new token</code>，名稱隨意（例如 <code>st-dashboard</code>）</li>
-        <li><strong>Repository access</strong> 選 <code>Only select repositories</code> → 選 <code>st-stock</code></li>
-        <li><strong>Permissions → Actions</strong> 設為 <code>Read and write</code></li>
-        <li>產生後複製貼上到下方欄位</li>
-      </ol>
-    </details>
-
-    <label for="tokenInput">Personal Access Token</label>
-    <input type="password" id="tokenInput" placeholder="github_pat_xxxxxxxx…" autocomplete="off" />
-
-    <div class="modal-actions">
-      <button class="btn btn-danger" id="btnClearToken">清除</button>
-      <button class="btn btn-ghost"  id="btnCancelModal">取消</button>
-      <button class="btn btn-primary" id="btnSaveToken">儲存</button>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -867,40 +777,22 @@ function renderRecommendations(rec) {
 // ── 主程式 ───────────────────────────────────────────────────
 async function main() {
   try {
-    // 並行載入 latest.json 和 recommendations.json
-    const [res, recRes] = await Promise.all([
-      fetch("data/latest.json?t=" + Date.now()),
-      fetch("data/recommendations.json?t=" + Date.now()).catch(() => null),
-    ]);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const rec = recRes?.ok ? await recRes.json() : null;
-
     document.getElementById("loading").style.display = "none";
     document.getElementById("app").style.display = "block";
-
-    // 先插入盤前分析（若有），再渲染持倉
-    const recHtml = renderRecommendations(rec);
-    document.getElementById("app").innerHTML = recHtml;
-    renderGlobal(data);          // 追加到 app
+    await reloadData();
   } catch (err) {
+    document.getElementById("loading").style.display = "flex";
+    document.getElementById("app").style.display = "none";
     document.getElementById("loading").innerHTML = `
       <div style="font-size:32px">⚠️</div>
       <div>無法載入數據</div>
       <div style="font-size:12px;max-width:300px;text-align:center">${err.message}</div>
-      <div style="font-size:12px;color:var(--muted)">請確認 GitHub Actions 已成功執行，或手動執行 <code>node scripts/fetch-data.js</code></div>
+      <div style="font-size:12px;color:var(--muted)">請確認 GitHub Actions 已成功執行</div>
     `;
   }
 }
 
 main();
-
-// ══════════════════════════════════════════════════════════════
-// ── 刷新 & Token 邏輯 ─────────────────────────────────────────
-// ══════════════════════════════════════════════════════════════
-const REPO   = "shen700420/st-stock";
-const WORKFLOW_FILE = "update-data.yml";
-const TOKEN_KEY     = "gh_pat_st";
 
 // ── Toast 通知 ────────────────────────────────────────────────
 let toastTimer = null;
@@ -914,15 +806,49 @@ function toast(msg, type = "inf", durationMs = 4000) {
   }
 }
 
-// ── 刷新按鈕狀態 ─────────────────────────────────────────────
-function setFabBusy(busy) {
-  const btn = document.getElementById("fabRefresh");
-  btn.disabled = busy;
-  btn.classList.toggle("spinning", busy);
-  btn.style.opacity = busy ? ".7" : "1";
+// ── Toast 通知 ────────────────────────────────────────────────
+let _toastTimer = null;
+function toast(msg, type = "inf", ms = 3500) {
+  const el = document.getElementById("fabToast");
+  el.textContent = msg;
+  el.className = `fab-toast ${type} show`;
+  clearTimeout(_toastTimer);
+  if (ms > 0) _toastTimer = setTimeout(() => el.classList.remove("show"), ms);
 }
 
-// ── 載入最新 JSON（不重整頁面）────────────────────────────────
+// ── 資料新鮮度 badge ──────────────────────────────────────────
+let _lastUpdatedAt = null;
+function updateAgeBadge() {
+  if (!_lastUpdatedAt) return;
+  const minAgo = Math.floor((Date.now() - _lastUpdatedAt) / 60000);
+  const el = document.getElementById("ageBadge");
+  let cls, label;
+  if      (minAgo <  5) { cls = "age-fresh"; label = "剛更新"; }
+  else if (minAgo < 20) { cls = "age-ok";    label = `${minAgo} 分鐘前`; }
+  else if (minAgo < 60) { cls = "age-stale"; label = `${minAgo} 分鐘前 ⚠️`; }
+  else                  { cls = "age-old";   label = `${Math.floor(minAgo/60)} 小時前 ⚠️`; }
+  el.className = `age-badge ${cls}`;
+  el.textContent = label;
+}
+
+// ── 重新載入 JSON（不重整頁面）───────────────────────────────
+async function handleRefresh() {
+  const btn = document.getElementById("fabRefresh");
+  btn.disabled = true;
+  btn.classList.add("spinning");
+  toast("🔄 讀取最新數據…", "inf", 0);
+  try {
+    await reloadData();
+    toast("✅ 已是最新數據", "ok");
+  } catch (err) {
+    toast(`❌ ${err.message}`, "err", 5000);
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove("spinning");
+  }
+}
+
+// ── 載入 JSON + 更新時間 badge ───────────────────────────────
 async function reloadData() {
   const [res, recRes] = await Promise.all([
     fetch("data/latest.json?t=" + Date.now()),
@@ -932,140 +858,23 @@ async function reloadData() {
   const data = await res.json();
   const rec  = recRes?.ok ? await recRes.json() : null;
 
-  const app = document.getElementById("app");
-  app.innerHTML = renderRecommendations(rec);
+  document.getElementById("app").innerHTML = renderRecommendations(rec);
   renderGlobal(data);
 
   const m = data._meta;
   document.getElementById("updateInfo").textContent =
     `最後更新：${fmt.date(m.updatedAt)}（${m.version}）`;
+
+  // 更新新鮮度 badge
+  try { _lastUpdatedAt = new Date(m.updatedAt).getTime(); } catch {}
+  updateAgeBadge();
 }
 
-// ── GitHub API：觸發 workflow ─────────────────────────────────
-async function triggerWorkflow(token) {
-  const r = await fetch(
-    `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
-    {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Accept": "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ref: "main" }),
-    }
-  );
-  if (r.status === 401) throw new Error("Token 無效或已過期，請重新設定");
-  if (r.status === 404) throw new Error("找不到 Workflow，請確認 repo 與檔名");
-  if (!r.ok) throw new Error(`GitHub API 錯誤 ${r.status}`);
-}
+// ── 每分鐘刷新 badge 顯示（不重打 API）──────────────────────
+setInterval(updateAgeBadge, 60_000);
 
-// ── GitHub API：輪詢最新 run 是否完成 ────────────────────────
-async function pollUntilDone(token) {
-  const maxWait = 18;   // 最多等 18 × 10s = 3 分鐘
-  for (let i = 1; i <= maxWait; i++) {
-    await new Promise(r => setTimeout(r, 10_000));
-    toast(`⏳ Actions 執行中… (${i * 10}s)`, "inf", 0);
-
-    try {
-      const r = await fetch(
-        `https://api.github.com/repos/${REPO}/actions/runs?branch=main&per_page=3&event=workflow_dispatch`,
-        { headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" } }
-      );
-      const { workflow_runs: runs } = await r.json();
-      const latest = runs?.[0];
-      if (!latest) continue;
-
-      if (latest.status === "completed") {
-        if (latest.conclusion === "success") return;
-        throw new Error(`Actions 失敗：${latest.conclusion}`);
-      }
-    } catch (e) {
-      if (e.message.startsWith("Actions")) throw e;
-      // 網路暫時問題，繼續輪詢
-    }
-  }
-  throw new Error("等待超時（3 分鐘），請稍後手動刷新頁面");
-}
-
-// ── 主刷新流程 ────────────────────────────────────────────────
-async function handleRefresh() {
-  const token = localStorage.getItem(TOKEN_KEY);
-  if (!token) {
-    openTokenModal();
-    toast("請先設定 GitHub Token", "err");
-    return;
-  }
-
-  setFabBusy(true);
-  try {
-    toast("🚀 觸發 GitHub Actions…", "inf", 0);
-    await triggerWorkflow(token);
-
-    // 等 Actions 啟動 (約 3–5 秒)
-    await new Promise(r => setTimeout(r, 5_000));
-    toast("⏳ Actions 執行中…", "inf", 0);
-
-    await pollUntilDone(token);
-
-    toast("✅ 數據更新完成！", "ok");
-    await reloadData();
-  } catch (err) {
-    toast(`❌ ${err.message}`, "err", 6000);
-    if (err.message.includes("Token")) openTokenModal();
-  } finally {
-    setFabBusy(false);
-  }
-}
-
-// ── Token Modal ────────────────────────────────────────────────
-function refreshTokenStatus() {
-  const tok = localStorage.getItem(TOKEN_KEY);
-  const el  = document.getElementById("tokenStatusBadge");
-  if (tok) {
-    el.className = "token-status has-token";
-    el.textContent = `✅ 已儲存 Token（${tok.slice(0, 16)}…）`;
-  } else {
-    el.className = "token-status no-token";
-    el.textContent = "⚠️ 尚未設定 Token，刷新按鈕無法使用";
-  }
-}
-
-function openTokenModal() {
-  refreshTokenStatus();
-  document.getElementById("tokenInput").value = "";
-  document.getElementById("tokenModal").classList.add("open");
-}
-function closeTokenModal() {
-  document.getElementById("tokenModal").classList.remove("open");
-}
-
+// ── 綁定按鈕 ─────────────────────────────────────────────────
 document.getElementById("fabRefresh").addEventListener("click", handleRefresh);
-document.getElementById("fabSettings").addEventListener("click", openTokenModal);
-document.getElementById("modalClose").addEventListener("click", closeTokenModal);
-document.getElementById("btnCancelModal").addEventListener("click", closeTokenModal);
-
-document.getElementById("btnSaveToken").addEventListener("click", () => {
-  const val = document.getElementById("tokenInput").value.trim();
-  if (!val) { toast("Token 不能為空", "err"); return; }
-  localStorage.setItem(TOKEN_KEY, val);
-  toast("✅ Token 已儲存", "ok");
-  refreshTokenStatus();
-  closeTokenModal();
-});
-
-document.getElementById("btnClearToken").addEventListener("click", () => {
-  localStorage.removeItem(TOKEN_KEY);
-  toast("Token 已清除", "inf");
-  refreshTokenStatus();
-  document.getElementById("tokenInput").value = "";
-});
-
-// 點擊 overlay 背景關閉
-document.getElementById("tokenModal").addEventListener("click", e => {
-  if (e.target === e.currentTarget) closeTokenModal();
-});
 </script>
 </body>
 </html>
