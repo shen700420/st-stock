@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updatedAt": "2026-05-20T09:25:19.232Z",
+    "updatedAt": "2026-05-20T10:04:08.465Z",
     "dataDate": "20260520",
     "version": "V0014補4"
   },
@@ -143,7 +143,7 @@
       "change": 17.2,
       "changePercent": 2.5237,
       "open": 664.895,
-      "high": 725.9,
+      "high": 725.94,
       "low": 652.21,
       "prevClose": 681.54,
       "volume": 61031215
@@ -204,14 +204,14 @@
       "symbol": "NQ=F",
       "source": "Yahoo",
       "dataDate": "2026-05-20",
-      "price": 29073.75,
-      "change": 149.5,
-      "changePercent": 0.51686734,
+      "price": 29142.25,
+      "change": 218,
+      "changePercent": 0.75369287,
       "open": 28929.75,
-      "high": 29136.75,
+      "high": 29149.75,
       "low": 28797.25,
       "prevClose": 28924.25,
-      "volume": 93792
+      "volume": 97060
     }
   ]
 }
