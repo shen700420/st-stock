@@ -1,57 +1,86 @@
 {
   "_meta": {
-    "date": "2026-05-18",
-    "generatedAt": "2026-05-18T08:50:00+08:00",
+    "date": "2026-05-22",
+    "generatedAt": "2026-05-22T09:00:00+08:00",
     "modelVersion": "V0014補4",
     "analyst": "ST 台股分析模型"
   },
   "marketOutlook": {
-    "direction": "空方主導",
-    "directionColor": "red",
-    "summary": "SOX -4.02%，VIX +6.78% 恐慌升溫，NQ期指 -0.80%，週末無重大正面事件",
-    "indexTarget": "加權指數預計低開 -1.5%~-2.5%（約 40,100~40,600）",
-    "operationMode": "高度保守，持現為主，專注庫存風控"
+    "direction": "多方緩步回升",
+    "directionColor": "green",
+    "summary": "SOX +1.28%，VIX -3.90% 恐慌舒緩，MU +4.11%（Samsung罷工消息帶動DRAM正向），TSM ADR +1.38%，台股5/21大漲+3.37%",
+    "indexTarget": "加權指數預計震盪走高 +0.5%~+1.5%（約 41,600~42,000）",
+    "operationMode": "多方緩步進場，精選 DRAM 受益標的，防 R24 追高陷阱（聯電昨爆量）"
   },
   "r47Alert": null,
   "dram": {
     "triggered": true,
-    "signal": "負向",
-    "detail": "MU -6.62% vs SOX -4.02%，族群信號比率 1.65 倍（反向）→ DRAM 族群特定利空",
-    "avoid": ["6770.TW", "2408.TW", "2344.TW", "2337.TW"]
+    "signal": "正向",
+    "detail": "MU +4.11% vs SOX +1.28%，族群信號比率 3.21 倍（正向）→ Samsung 罷工消息，台灣 DRAM 廠受益",
+    "benefit": ["2408.TW", "2344.TW", "6770.TW", "2337.TW"]
   },
-  "top3": [],
-  "noTradeReason": "空方環境（SOX -4.02%，VIX 18.43 升溫），D1 宏觀評分=0，所有候選標的最高估分 ≤3/12，遠低於進場門檻 8/12。建議今日持現觀望，不新開部位。",
-  "watchForRebound": [
+  "top3": [
     {
+      "rank": 1,
+      "symbol": "2330.TW",
+      "name": "台積電",
+      "score": "10/12",
+      "entryZone": "2,230～2,250",
+      "stopLoss": "2,180",
+      "reason": "TSM ADR +1.38% 直接對應本體，AI CoWoS 需求訂單能見度高，主力連日買超。開盤 15 分鐘確認不跳空過高再進。",
+      "warnings": []
+    },
+    {
+      "rank": 2,
+      "symbol": "2408.TW",
+      "name": "南亞科",
+      "score": "9/12",
+      "entryZone": "盤中確認不破昨收即可進",
+      "stopLoss": "昨收 -3%",
+      "reason": "MU 大幅跑贏 SOX（R45 DRAM 正訊號）+ Samsung 勞資問題供給疑慮，台灣 DRAM 廠報價有上調空間。南亞科是最直接的本地 DRAM 受益廠。",
+      "warnings": []
+    },
+    {
+      "rank": 3,
       "symbol": "2303.TW",
       "name": "聯電",
-      "note": "5/15 相對抗跌（+1.85%），若盤中跌幅縮窄可列逆向觀察"
+      "score": "6/12",
+      "entryZone": "等確認站回 116+ 再進（115～116）",
+      "stopLoss": "112",
+      "reason": "矽光子 AI 題材持續，但 5/21 大漲+7.41% 爆量，R24 警戒觸發。5/22 前 15 分鐘禁止追多，等盤中確認站回 116 再操作。",
+      "warnings": [
+        "🔴 R24警戒：5/21漲+7.41%爆量逾50萬張，5/22開盤輕微開低→前15分鐘禁追多",
+        "🟡 若盤中無法收復 116，本日建議跳過此標的"
+      ]
     }
   ],
+  "noTradeReason": null,
+  "watchForRebound": [],
   "portfolioActions": [
     {
       "symbol": "6770.TW",
       "name": "力積電",
-      "urgency": "high",
+      "urgency": "medium",
       "alerts": [
-        "🔴 R24 出貨型警戒（5/15 高67→收62.8，爆量356M）",
-        "🔴 R45：MU -6.62%，DRAM 族群特定利空"
+        "🟢 R45 DRAM 正訊號（MU +4.11%，Samsung罷工效應），族群受益",
+        "🟡 5/21 收 59.1（低於成本 60.85），今日早盤 62.2（+5.25%）已強力反彈",
+        "⚠️ 63 附近存在上方套牢壓力，留意反彈至阻力區是否縮量"
       ],
       "scenarios": [
-        { "condition": "開盤跌破 62", "action": "🔴 立即縮倉新加碼2張，執行停損 @60.71" },
-        { "condition": "開盤 62~63 整理", "action": "🟡 等15分鐘確認（R27），走弱仍縮倉" },
-        { "condition": "開盤跳空高開 ≥64", "action": "🟢 暫緩縮倉，確認15分鐘走勢" },
-        { "condition": "跌破均價停損 57.81", "action": "🔴 R02 強制全出，無例外" }
+        { "condition": "盤中維持 62 以上量縮整理", "action": "🟢 持倉觀望，DRAM 正訊號支持，等待突破 63 確認" },
+        { "condition": "62 以上量縮回測站穩", "action": "🟡 不加碼，觀察是否有效站穩 62 平台再作決定" },
+        { "condition": "回跌破 61", "action": "🟡 評估減 2 張（新加碼部份），降低整體部位風險" },
+        { "condition": "跌破 60", "action": "🔴 R02 強制停損，剩餘持倉全出，無例外" }
       ]
     }
   ],
   "keyIndicators": {
-    "SOX":  { "value": -4.02, "label": "費半" },
-    "VIX":  { "value": 18.43, "label": "VIX" },
-    "TSM":  { "value": -3.20, "label": "台積電ADR" },
-    "MU":   { "value": -6.62, "label": "美光MU" },
-    "SNDK": { "value": 1.80,  "label": "SanDisk" },
-    "NVDA": { "value": -4.42, "label": "NVIDIA" },
-    "NQ":   { "value": -0.80, "label": "那指期指" }
+    "SOX":  { "value": 1.28,  "label": "費半" },
+    "VIX":  { "value": -3.90, "label": "VIX" },
+    "TSM":  { "value": 1.38,  "label": "台積電ADR" },
+    "MU":   { "value": 4.11,  "label": "美光MU" },
+    "SNDK": { "value": 0.67,  "label": "SanDisk" },
+    "NVDA": { "value": 1.30,  "label": "NVIDIA" },
+    "NQ":   { "value": 0.50,  "label": "那指期指" }
   }
 }
