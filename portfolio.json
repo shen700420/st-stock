@@ -1,17 +1,6 @@
 {
   "_comment": "庫存設定檔：新增/刪除持倉在 positions 陣列，watchlist 為觀察清單",
-  "positions": [
-    {
-      "symbol": "6770.TW",
-      "name": "力積電",
-      "shares": 4000,
-      "costPerShare": 60.85,
-      "stopLoss": 57.81,
-      "alertStopLoss": 60.71,
-      "entryDate": "2026-05-06",
-      "notes": "原2張@57.8 + 加碼2張@63.9，均價60.85；5/22 DRAM正訊號反彈至62.2，觀察是否站穩62"
-    }
-  ],
+  "positions": [],
   "watchlist": [
     "2330.TW",
     "2303.TW",

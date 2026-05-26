@@ -1,86 +1,80 @@
 {
   "_meta": {
-    "date": "2026-05-22",
-    "generatedAt": "2026-05-22T09:00:00+08:00",
+    "date": "2026-05-26",
+    "generatedAt": "2026-05-26T09:00:00+08:00",
     "modelVersion": "V0014補4",
     "analyst": "ST 台股分析模型"
   },
   "marketOutlook": {
-    "direction": "多方緩步回升",
+    "direction": "強多方｜歷史新高謹慎追價",
     "directionColor": "green",
-    "summary": "SOX +1.28%，VIX -3.90% 恐慌舒緩，MU +4.11%（Samsung罷工消息帶動DRAM正向），TSM ADR +1.38%，台股5/21大漲+3.37%",
-    "indexTarget": "加權指數預計震盪走高 +0.5%~+1.5%（約 41,600~42,000）",
-    "operationMode": "多方緩步進場，精選 DRAM 受益標的，防 R24 追高陷阱（聯電昨爆量）"
+    "summary": "NVIDIA $80B回購+25x股息提升題材延燒，台股跳空開盤43,317歷史新高(+2.48%)。SOX 5/22 +1.99%，NQ期指+0.94%。但NVDA本身利多出盡(-1.90%)，高點追價風險升高，開盤15分鐘先觀察",
+    "indexTarget": "加權指數區間 42,800～43,600，注意歷史高點壓力",
+    "operationMode": "多方操作為主，精選補漲落後股，50%部位進場，嚴設停損"
   },
-  "r47Alert": null,
+  "r47Alert": "台股跳空高開+2.48% ≥+1.5%，NVDA本身-1.90%有利多出盡疑慮。R47精神適用：開盤0~15分鐘禁止追多，先觀察指數方向再決策",
   "dram": {
-    "triggered": true,
-    "signal": "正向",
-    "detail": "MU +4.11% vs SOX +1.28%，族群信號比率 3.21 倍（正向）→ Samsung 罷工消息，台灣 DRAM 廠受益",
-    "benefit": ["2408.TW", "2344.TW", "6770.TW", "2337.TW"]
+    "triggered": false,
+    "signal": "中性偏弱",
+    "detail": "MU 5/22 -1.46%，DRAM族群訊號轉中性。聚焦AI伺服器組裝與散熱族群",
+    "benefit": []
   },
   "top3": [
     {
       "rank": 1,
-      "symbol": "2330.TW",
-      "name": "台積電",
-      "score": "10/12",
-      "entryZone": "2,230～2,250",
-      "stopLoss": "2,180",
-      "reason": "TSM ADR +1.38% 直接對應本體，AI CoWoS 需求訂單能見度高，主力連日買超。開盤 15 分鐘確認不跳空過高再進。",
+      "symbol": "2382.TW",
+      "name": "廣達",
+      "score": "9/12",
+      "entryZone": "315～320（開盤15分鐘後確認方向）",
+      "stopLoss": "312（-1.5%）",
+      "reason": "NVIDIA AI伺服器最大代工廠（HGX/DGX/GBS），昨日（5/25）僅漲+0.16%明顯落後，今日AI題材延續下補漲空間最大。無R24追高風險，是本日最佳風險報酬標的。",
       "warnings": []
     },
     {
       "rank": 2,
-      "symbol": "2408.TW",
-      "name": "南亞科",
+      "symbol": "2330.TW",
+      "name": "台積電",
       "score": "9/12",
-      "entryZone": "盤中確認不破昨收即可進",
-      "stopLoss": "昨收 -3%",
-      "reason": "MU 大幅跑贏 SOX（R45 DRAM 正訊號）+ Samsung 勞資問題供給疑慮，台灣 DRAM 廠報價有上調空間。南亞科是最直接的本地 DRAM 受益廠。",
-      "warnings": []
+      "entryZone": "回測2,260～2,280再進（不追開盤高）",
+      "stopLoss": "2,230（-2.5%）",
+      "reason": "AI CoWoS需求持續，2nm全力出貨，基本面強。開盤已報2,295(+1.77%)，優先等回測機會，勿追高開。",
+      "warnings": [
+        "🟡 開盤已高，等回測再進，不追開盤價"
+      ]
     },
     {
       "rank": 3,
-      "symbol": "2303.TW",
-      "name": "聯電",
-      "score": "6/12",
-      "entryZone": "等確認站回 116+ 再進（115～116）",
-      "stopLoss": "112",
-      "reason": "矽光子 AI 題材持續，但 5/21 大漲+7.41% 爆量，R24 警戒觸發。5/22 前 15 分鐘禁止追多，等盤中確認站回 116 再操作。",
-      "warnings": [
-        "🔴 R24警戒：5/21漲+7.41%爆量逾50萬張，5/22開盤輕微開低→前15分鐘禁追多",
-        "🟡 若盤中無法收復 116，本日建議跳過此標的"
-      ]
+      "symbol": "3017.TW",
+      "name": "奇鋐",
+      "score": "8/12",
+      "entryZone": "確認不破2,550後進場",
+      "stopLoss": "2,510（-2.5%）",
+      "reason": "AI散熱龍頭，NVIDIA每台AI伺服器的必要供應商。昨日+1.18%溫和，今日有機會跟上主力AI族群。",
+      "warnings": []
     }
   ],
   "noTradeReason": null,
   "watchForRebound": [],
-  "portfolioActions": [
+  "portfolioActions": [],
+  "avoidToday": [
     {
-      "symbol": "6770.TW",
-      "name": "力積電",
-      "urgency": "medium",
-      "alerts": [
-        "🟢 R45 DRAM 正訊號（MU +4.11%，Samsung罷工效應），族群受益",
-        "🟡 5/21 收 59.1（低於成本 60.85），今日早盤 62.2（+5.25%）已強力反彈",
-        "⚠️ 63 附近存在上方套牢壓力，留意反彈至阻力區是否縮量"
-      ],
-      "scenarios": [
-        { "condition": "盤中維持 62 以上量縮整理", "action": "🟢 持倉觀望，DRAM 正訊號支持，等待突破 63 確認" },
-        { "condition": "62 以上量縮回測站穩", "action": "🟡 不加碼，觀察是否有效站穩 62 平台再作決定" },
-        { "condition": "回跌破 61", "action": "🟡 評估減 2 張（新加碼部份），降低整體部位風險" },
-        { "condition": "跌破 60", "action": "🔴 R02 強制停損，剩餘持倉全出，無例外" }
-      ]
+      "symbol": "2454.TW",
+      "name": "聯發科",
+      "reason": "🔴 R24警戒：5/25大漲+9.97%爆量，今日絕對禁止追高，等回測整理後再評估"
+    },
+    {
+      "symbol": "2408.TW",
+      "name": "南亞科",
+      "reason": "🟡 MU 5/22 -1.46%，DRAM族群訊號轉中性，暫觀望"
     }
   ],
   "keyIndicators": {
-    "SOX":  { "value": 1.28,  "label": "費半" },
-    "VIX":  { "value": -3.90, "label": "VIX" },
-    "TSM":  { "value": 1.38,  "label": "台積電ADR" },
-    "MU":   { "value": 4.11,  "label": "美光MU" },
-    "SNDK": { "value": 0.67,  "label": "SanDisk" },
-    "NVDA": { "value": 1.30,  "label": "NVIDIA" },
-    "NQ":   { "value": 0.50,  "label": "那指期指" }
+    "SOX":  { "value": 1.99,  "label": "費半" },
+    "VIX":  { "value": -0.36, "label": "VIX" },
+    "TSM":  { "value": -0.65, "label": "台積電ADR" },
+    "MU":   { "value": -1.46, "label": "美光MU" },
+    "SNDK": { "value": 0.20,  "label": "SanDisk" },
+    "NVDA": { "value": -1.90, "label": "NVIDIA" },
+    "NQ":   { "value": 0.94,  "label": "那指期指" }
   }
 }
