@@ -1,42 +1,18 @@
 {
   "_meta": {
-    "updatedAt": "2026-05-25T10:59:58.183Z",
-    "dataDate": "20260525",
+    "updatedAt": "2026-05-26T04:56:52.323Z",
+    "dataDate": "20260526",
     "version": "V0014補4"
   },
   "summary": {
-    "totalMarketValue": 270400,
-    "totalCostValue": 243400,
-    "totalPnl": 27000,
-    "totalPnlPercent": 11.09,
-    "positionCount": 1,
+    "totalMarketValue": 0,
+    "totalCostValue": 0,
+    "totalPnl": 0,
+    "totalPnlPercent": 0,
+    "positionCount": 0,
     "hasAlerts": false
   },
-  "positions": [
-    {
-      "symbol": "6770.TW",
-      "name": "力積電",
-      "shares": 4000,
-      "costPerShare": 60.85,
-      "stopLoss": 57.81,
-      "alertStopLoss": 60.71,
-      "entryDate": "2026-05-06",
-      "notes": "原2張@57.8 + 加碼2張@63.9，均價60.85；5/22 DRAM正訊號反彈至62.2，觀察是否站穩62",
-      "price": 67.6,
-      "open": 65,
-      "high": 68.2,
-      "low": 62.3,
-      "change": 3.8,
-      "changePercent": 5.956112852664576,
-      "volume": 321963402,
-      "dataDate": "2026-05-25",
-      "marketValue": 270400,
-      "costValue": 243400,
-      "pnl": 27000,
-      "pnlPercent": 11.09,
-      "alerts": []
-    }
-  ],
+  "positions": [],
   "watchlist": [
     {
       "symbol": "2330.TW",
@@ -108,14 +84,14 @@
     {
       "symbol": "^TWII",
       "source": "Yahoo",
-      "dataDate": "2026-05-25",
-      "price": 43644.4,
-      "change": 1376.4297,
-      "changePercent": 3.2564368,
-      "open": 42667.87,
-      "high": 43645.78,
-      "low": 42667.87,
-      "prevClose": 42267.97,
+      "dataDate": "2026-05-26",
+      "price": 43663.32,
+      "change": 18.921875,
+      "changePercent": 0.04335294,
+      "open": 43708.89,
+      "high": 44097.63,
+      "low": 43349.77,
+      "prevClose": 43644.4,
       "volume": 0
     },
     {
@@ -187,27 +163,27 @@
       "symbol": "^VIX",
       "source": "Yahoo",
       "dataDate": "2026-05-25",
-      "price": 16.64,
-      "change": -0.060001373,
-      "changePercent": -0.35928965,
-      "open": 16.81,
-      "high": 16.87,
-      "low": 16.64,
+      "price": 16.59,
+      "change": -0.11000061,
+      "changePercent": -0.6586863,
+      "open": 0,
+      "high": 0,
+      "low": 0,
       "prevClose": 16.7,
       "volume": 0
     },
     {
       "symbol": "NQ=F",
       "source": "Yahoo",
-      "dataDate": "2026-05-25",
-      "price": 29558.75,
-      "change": 111.5,
-      "changePercent": 0.37864316,
+      "dataDate": "2026-05-26",
+      "price": 29801.5,
+      "change": 242.75,
+      "changePercent": 0.82124585,
       "open": 29676.25,
       "high": 29995,
       "low": 29676.25,
       "prevClose": 29558.75,
-      "volume": 72926
+      "volume": 171028
     }
   ]
 }
