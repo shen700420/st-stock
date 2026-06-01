@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updatedAt": "2026-06-01T05:53:27.806Z",
+    "updatedAt": "2026-06-01T11:26:32.359Z",
     "dataDate": "20260601",
     "version": "V0014補4"
   },
@@ -25,7 +25,7 @@
       "high": 2415,
       "low": 2350,
       "prevClose": 2355,
-      "volume": 34936000
+      "volume": 60942792
     },
     {
       "symbol": "2303.TW",
@@ -38,7 +38,7 @@
       "high": 155.5,
       "low": 140,
       "prevClose": 144.5,
-      "volume": 285398000
+      "volume": 289268747
     },
     {
       "symbol": "2408.TW",
@@ -51,7 +51,7 @@
       "high": 381.5,
       "low": 359.5,
       "prevClose": 347,
-      "volume": 126408000
+      "volume": 129059908
     },
     {
       "symbol": "2344.TW",
@@ -64,7 +64,7 @@
       "high": 173.5,
       "low": 166,
       "prevClose": 158,
-      "volume": 291478000
+      "volume": 295190831
     },
     {
       "symbol": "2337.TW",
@@ -77,7 +77,7 @@
       "high": 175,
       "low": 166,
       "prevClose": 166.5,
-      "volume": 187037000
+      "volume": 190490552
     }
   ],
   "globalIndicators": [
@@ -87,7 +87,7 @@
       "dataDate": "2026-06-01",
       "price": 45337.91,
       "change": 604.96875,
-      "changePercent": 1.3473467,
+      "changePercent": 1.352401,
       "open": 44872.82,
       "high": 45931.1,
       "low": 44872.82,
@@ -162,28 +162,28 @@
     {
       "symbol": "^VIX",
       "source": "Yahoo",
-      "dataDate": "2026-05-29",
-      "price": 15.32,
-      "change": -0.42000008,
-      "changePercent": -2.6683614,
-      "open": 0,
-      "high": 0,
-      "low": 0,
-      "prevClose": 15.74,
+      "dataDate": "2026-06-01",
+      "price": 15.78,
+      "change": 0.46000004,
+      "changePercent": 3.0026112,
+      "open": 15.88,
+      "high": 15.99,
+      "low": 15.75,
+      "prevClose": 15.32,
       "volume": 0
     },
     {
       "symbol": "NQ=F",
       "source": "Yahoo",
       "dataDate": "2026-06-01",
-      "price": 30575,
-      "change": 169.75,
-      "changePercent": 0.55829173,
+      "price": 30463,
+      "change": 57.75,
+      "changePercent": 0.1899343,
       "open": 30415.5,
       "high": 30595.25,
       "low": 30361.25,
       "prevClose": 30405.25,
-      "volume": 52634
+      "volume": 92198
     }
   ]
 }
