@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updatedAt": "2026-06-04T09:51:41.849Z",
+    "updatedAt": "2026-06-04T10:28:44.525Z",
     "dataDate": "20260604",
     "version": "V0014補4"
   },
@@ -42,42 +42,42 @@
     },
     {
       "symbol": "2408.TW",
-      "source": "Yahoo(fallback)",
+      "source": "TWSE",
       "dataDate": "2026-06-04",
       "price": 395,
       "change": -6.5,
-      "changePercent": -1.618929,
+      "changePercent": -1.61892901618929,
       "open": 395.5,
       "high": 409.5,
       "low": 392,
       "prevClose": 401.5,
-      "volume": 114754468
+      "volume": 115749814
     },
     {
       "symbol": "2344.TW",
-      "source": "Yahoo(fallback)",
+      "source": "TWSE",
       "dataDate": "2026-06-04",
       "price": 179.5,
       "change": 2,
-      "changePercent": 1.1267605,
+      "changePercent": 1.1267605633802817,
       "open": 175,
       "high": 188,
       "low": 175,
       "prevClose": 177.5,
-      "volume": 226727534
+      "volume": 227016133
     },
     {
       "symbol": "2337.TW",
-      "source": "Yahoo(fallback)",
+      "source": "TWSE",
       "dataDate": "2026-06-04",
       "price": 156.5,
       "change": -5.5,
-      "changePercent": -3.3950615,
+      "changePercent": -3.3950617283950617,
       "open": 158,
       "high": 161,
       "low": 156.5,
       "prevClose": 162,
-      "volume": 26937931
+      "volume": 27236146
     }
   ],
   "globalIndicators": [
@@ -163,9 +163,9 @@
       "symbol": "^VIX",
       "source": "Yahoo",
       "dataDate": "2026-06-04",
-      "price": 16.43,
-      "change": 0.37000084,
-      "changePercent": 2.303866,
+      "price": 16.44,
+      "change": 0.38000107,
+      "changePercent": 2.367608,
       "open": 16.33,
       "high": 16.58,
       "low": 16.28,
@@ -176,14 +176,14 @@
       "symbol": "NQ=F",
       "source": "Yahoo",
       "dataDate": "2026-06-04",
-      "price": 30305,
-      "change": -328.25,
-      "changePercent": -1.0715481,
+      "price": 30288,
+      "change": -345.25,
+      "changePercent": -1.1270434,
       "open": 30453,
       "high": 30544.5,
       "low": 30250,
       "prevClose": 30633.25,
-      "volume": 112307
+      "volume": 118702
     }
   ]
 }
