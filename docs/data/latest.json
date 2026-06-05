@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updatedAt": "2026-06-05T08:53:12.658Z",
+    "updatedAt": "2026-06-05T09:40:17.353Z",
     "dataDate": "20260605",
     "version": "V0014補4"
   },
@@ -25,7 +25,7 @@
       "high": 2405,
       "low": 2350,
       "prevClose": 2385,
-      "volume": 38924331
+      "volume": 43403895
     },
     {
       "symbol": "2303.TW",
@@ -38,7 +38,7 @@
       "high": 133,
       "low": 125,
       "prevClose": 125,
-      "volume": 377472061
+      "volume": 377903061
     },
     {
       "symbol": "2408.TW",
@@ -163,12 +163,12 @@
       "symbol": "^VIX",
       "source": "Yahoo",
       "dataDate": "2026-06-05",
-      "price": 15.66,
-      "change": 0.26000023,
-      "changePercent": 1.6883132,
+      "price": 15.67,
+      "change": 0.27000046,
+      "changePercent": 1.7532498,
       "open": 15.87,
       "high": 15.89,
-      "low": 15.65,
+      "low": 15.56,
       "prevClose": 15.4,
       "volume": 0
     },
@@ -176,14 +176,14 @@
       "symbol": "NQ=F",
       "source": "Yahoo",
       "dataDate": "2026-06-05",
-      "price": 30175.75,
-      "change": -312.5,
-      "changePercent": -1.0249851,
+      "price": 30181.75,
+      "change": -306.5,
+      "changePercent": -1.0053053,
       "open": 30414,
       "high": 30422,
       "low": 30052.5,
       "prevClose": 30488.25,
-      "volume": 114329
+      "volume": 123704
     }
   ]
 }
