@@ -1,80 +1,55 @@
 {
   "_meta": {
-    "date": "2026-05-26",
-    "generatedAt": "2026-05-26T09:00:00+08:00",
+    "date": "2026-06-08",
+    "generatedAt": "2026-06-08T08:30:00+08:00",
     "modelVersion": "V0014補4",
     "analyst": "ST 台股分析模型"
   },
   "marketOutlook": {
-    "direction": "強多方｜歷史新高謹慎追價",
-    "directionColor": "green",
-    "summary": "NVIDIA $80B回購+25x股息提升題材延燒，台股跳空開盤43,317歷史新高(+2.48%)。SOX 5/22 +1.99%，NQ期指+0.94%。但NVDA本身利多出盡(-1.90%)，高點追價風險升高，開盤15分鐘先觀察",
-    "indexTarget": "加權指數區間 42,800～43,600，注意歷史高點壓力",
-    "operationMode": "多方操作為主，精選補漲落後股，50%部位進場，嚴設停損"
+    "direction": "極度空方｜黑色星期一",
+    "directionColor": "red",
+    "summary": "SOX 單日暴跌 -10.26%（2020 年以來最大），博通AI指引不如預期 + 美非農超強重燃升息疑慮，台積電ADR -6.69%，台指期夜盤史上最大跌幅 -3,006 點至 42,220",
+    "indexTarget": "加權指數預估低開 42,000～42,500，跌幅約 -5.8%～-6.7%",
+    "operationMode": "100% 持現觀望，絕對不開新倉，有持倉強制執行 R02 停損"
   },
-  "r47Alert": "台股跳空高開+2.48% ≥+1.5%，NVDA本身-1.90%有利多出盡疑慮。R47精神適用：開盤0~15分鐘禁止追多，先觀察指數方向再決策",
+  "r47Alert": null,
   "dram": {
-    "triggered": false,
-    "signal": "中性偏弱",
-    "detail": "MU 5/22 -1.46%，DRAM族群訊號轉中性。聚焦AI伺服器組裝與散熱族群",
-    "benefit": []
+    "triggered": true,
+    "signal": "負向",
+    "detail": "MU -6.3% vs SOX -10.26%（DRAM 相對抗跌），但仍嚴重負向，今日迴避所有半導體族群",
+    "avoid": ["2408.TW", "2344.TW", "6770.TW", "2337.TW", "2303.TW"]
   },
-  "top3": [
+  "top3": [],
+  "noTradeReason": "極度空方環境（SOX -10.26%，VIX +34% 飆破20，台積電ADR -6.69%）。D1 宏觀評分 0/4，所有候選標的估分上限 ≤2/12，遠低於進場門檻 8/12。主因：博通 Q3 AI 指引不如預期（$160億 vs 預估 $172億），引發市場質疑 AI 成長上限。今日持現觀望，完全不開新倉。",
+  "watchForRebound": [
     {
-      "rank": 1,
-      "symbol": "2382.TW",
-      "name": "廣達",
-      "score": "9/12",
-      "entryZone": "315～320（開盤15分鐘後確認方向）",
-      "stopLoss": "312（-1.5%）",
-      "reason": "NVIDIA AI伺服器最大代工廠（HGX/DGX/GBS），昨日（5/25）僅漲+0.16%明顯落後，今日AI題材延續下補漲空間最大。無R24追高風險，是本日最佳風險報酬標的。",
-      "warnings": []
-    },
-    {
-      "rank": 2,
       "symbol": "2330.TW",
       "name": "台積電",
-      "score": "9/12",
-      "entryZone": "回測2,260～2,280再進（不追開盤高）",
-      "stopLoss": "2,230（-2.5%）",
-      "reason": "AI CoWoS需求持續，2nm全力出貨，基本面強。開盤已報2,295(+1.77%)，優先等回測機會，勿追高開。",
-      "warnings": [
-        "🟡 開盤已高，等回測再進，不追開盤價"
-      ]
-    },
-    {
-      "rank": 3,
-      "symbol": "3017.TW",
-      "name": "奇鋐",
-      "score": "8/12",
-      "entryZone": "確認不破2,550後進場",
-      "stopLoss": "2,510（-2.5%）",
-      "reason": "AI散熱龍頭，NVIDIA每台AI伺服器的必要供應商。昨日+1.18%溫和，今日有機會跟上主力AI族群。",
-      "warnings": []
-    }
-  ],
-  "noTradeReason": null,
-  "watchForRebound": [],
-  "portfolioActions": [],
-  "avoidToday": [
-    {
-      "symbol": "2454.TW",
-      "name": "聯發科",
-      "reason": "🔴 R24警戒：5/25大漲+9.97%爆量，今日絕對禁止追高，等回測整理後再評估"
+      "note": "跌深後最有資格領頭反彈，但需等 VIX <18、SOX 連兩日止跌後再評估，今日先觀察不進場"
     },
     {
       "symbol": "2408.TW",
       "name": "南亞科",
-      "reason": "🟡 MU 5/22 -1.46%，DRAM族群訊號轉中性，暫觀望"
+      "note": "MU 相對 SOX 抗跌（-6.3% vs -10.26%），若 DRAM 族群率先止穩可列底部觀察名單"
     }
   ],
+  "portfolioActions": [],
+  "bottomSignals": {
+    "required": [
+      "VIX 回落 < 18（目前 >20）❌",
+      "SOX 連兩日不創新低 ❌",
+      "TSM ADR 出現明確反彈訊號 ❌",
+      "NQ 期指止跌穩住 ⚠️"
+    ],
+    "status": "底部條件全數未達，禁止進場"
+  },
   "keyIndicators": {
-    "SOX":  { "value": 1.99,  "label": "費半" },
-    "VIX":  { "value": -0.36, "label": "VIX" },
-    "TSM":  { "value": -0.65, "label": "台積電ADR" },
-    "MU":   { "value": -1.46, "label": "美光MU" },
-    "SNDK": { "value": 0.20,  "label": "SanDisk" },
-    "NVDA": { "value": -1.90, "label": "NVIDIA" },
-    "NQ":   { "value": 0.94,  "label": "那指期指" }
+    "SOX":  { "value": -10.26, "label": "費半" },
+    "VIX":  { "value": 20.5,   "label": "VIX" },
+    "TSM":  { "value": -6.69,  "label": "台積電ADR" },
+    "MU":   { "value": -6.30,  "label": "美光MU" },
+    "AVGO": { "value": -14.0,  "label": "博通AVGO" },
+    "NVDA": { "value": -4.50,  "label": "NVIDIA" },
+    "NQ":   { "value": -4.18,  "label": "那指" }
   }
 }
