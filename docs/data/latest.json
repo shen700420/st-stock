@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updatedAt": "2026-06-09T08:30:09.281Z",
+    "updatedAt": "2026-06-09T09:36:33.767Z",
     "dataDate": "20260609",
     "version": "V0014補4"
   },
@@ -16,55 +16,55 @@
   "watchlist": [
     {
       "symbol": "2330.TW",
-      "source": "TWSE",
+      "source": "Yahoo(fallback)",
       "dataDate": "2026-06-09",
       "price": 2305,
       "change": 10,
-      "changePercent": 0.4357298474945534,
+      "changePercent": 0.43572983,
       "open": 2305,
       "high": 2320,
       "low": 2295,
       "prevClose": 2295,
-      "volume": 36272352
+      "volume": 36137311
     },
     {
       "symbol": "2303.TW",
-      "source": "TWSE",
+      "source": "Yahoo(fallback)",
       "dataDate": "2026-06-09",
       "price": 127.5,
       "change": 6.5,
-      "changePercent": 5.371900826446281,
+      "changePercent": 5.3719006,
       "open": 124.5,
       "high": 131.5,
       "low": 118.5,
       "prevClose": 121,
-      "volume": 374359529
+      "volume": 374065119
     },
     {
       "symbol": "2408.TW",
-      "source": "TWSE",
+      "source": "Yahoo(fallback)",
       "dataDate": "2026-06-09",
       "price": 363,
       "change": 23.5,
-      "changePercent": 6.9219440353460975,
+      "changePercent": 6.921944,
       "open": 350.5,
       "high": 366,
       "low": 342,
       "prevClose": 339.5,
-      "volume": 99865292
+      "volume": 99741677
     },
     {
       "symbol": "2344.TW",
-      "source": "TWSE",
+      "source": "Yahoo(fallback)",
       "dataDate": "2026-06-09",
       "price": 156.5,
       "change": 2.5,
-      "changePercent": 1.6233766233766231,
+      "changePercent": 1.6233766,
       "open": 160.5,
       "high": 161,
       "low": 153.5,
       "prevClose": 154,
-      "volume": 203232684
+      "volume": 202882644
     },
     {
       "symbol": "2337.TW",
@@ -163,12 +163,12 @@
       "symbol": "^VIX",
       "source": "Yahoo",
       "dataDate": "2026-06-09",
-      "price": 18.11,
-      "change": -0.80999947,
-      "changePercent": -4.281181,
+      "price": 18.07,
+      "change": -0.8500004,
+      "changePercent": -4.4973564,
       "open": 18.19,
       "high": 18.35,
-      "low": 18.11,
+      "low": 18.05,
       "prevClose": 18.92,
       "volume": 0
     },
@@ -176,14 +176,14 @@
       "symbol": "NQ=F",
       "source": "Yahoo",
       "dataDate": "2026-06-09",
-      "price": 29647,
-      "change": 192.25,
-      "changePercent": 0.6526961,
+      "price": 29670.75,
+      "change": 216,
+      "changePercent": 0.7333282,
       "open": 29435,
       "high": 29689.25,
       "low": 29303.5,
       "prevClose": 29454.75,
-      "volume": 91905
+      "volume": 98317
     }
   ]
 }
