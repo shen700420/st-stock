@@ -1,55 +1,74 @@
 {
   "_meta": {
-    "date": "2026-06-08",
-    "generatedAt": "2026-06-08T08:30:00+08:00",
+    "date": "2026-06-09",
+    "generatedAt": "2026-06-09T08:30:00+08:00",
     "modelVersion": "V0014補4",
     "analyst": "ST 台股分析模型"
   },
   "marketOutlook": {
-    "direction": "極度空方｜黑色星期一",
-    "directionColor": "red",
-    "summary": "SOX 單日暴跌 -10.26%（2020 年以來最大），博通AI指引不如預期 + 美非農超強重燃升息疑慮，台積電ADR -6.69%，台指期夜盤史上最大跌幅 -3,006 點至 42,220",
-    "indexTarget": "加權指數預估低開 42,000～42,500，跌幅約 -5.8%～-6.7%",
-    "operationMode": "100% 持現觀望，絕對不開新倉，有持倉強制執行 R02 停損"
+    "direction": "多方技術反彈｜CPI前謹慎短打",
+    "directionColor": "green",
+    "summary": "美股 6/8 強力回彈：SOX +4.10%、MU +9%、TSM ADR +2.64%。觸媒：伊朗宣布結束對以色列軍事行動（中東降溫）+ 半導體超賣技術買盤。台股 6/8 收 43,502（-3.48%，盤中最低跌 2,700 點），今日預估開高 +2%~+3%",
+    "indexTarget": "加權指數預估開盤 44,400～44,900，技術性反彈，注意週三 CPI 壓力",
+    "operationMode": "選擇性進場（50%部位），開盤15分鐘先觀察，CPI公布前（週三）務必先行減碼或出場"
   },
-  "r47Alert": null,
+  "r47Alert": "TSM ADR +2.64%（<3%，嚴格定義未觸發），但台股預估跳空高開 +2%以上，建議開盤 0~15 分鐘先觀察方向確認，不在開盤第一根K棒追多",
   "dram": {
     "triggered": true,
-    "signal": "負向",
-    "detail": "MU -6.3% vs SOX -10.26%（DRAM 相對抗跌），但仍嚴重負向，今日迴避所有半導體族群",
-    "avoid": ["2408.TW", "2344.TW", "6770.TW", "2337.TW", "2303.TW"]
+    "signal": "正向",
+    "detail": "MU +9.0% vs SOX +4.10%，族群信號比率 2.19 倍（正向）→ 三星韓廠供給疑慮重燃，DRAM 台廠受益",
+    "benefit": ["2408.TW", "2344.TW", "2337.TW"]
   },
-  "top3": [],
-  "noTradeReason": "極度空方環境（SOX -10.26%，VIX +34% 飆破20，台積電ADR -6.69%）。D1 宏觀評分 0/4，所有候選標的估分上限 ≤2/12，遠低於進場門檻 8/12。主因：博通 Q3 AI 指引不如預期（$160億 vs 預估 $172億），引發市場質疑 AI 成長上限。今日持現觀望，完全不開新倉。",
-  "watchForRebound": [
+  "top3": [
     {
+      "rank": 1,
       "symbol": "2330.TW",
       "name": "台積電",
-      "note": "跌深後最有資格領頭反彈，但需等 VIX <18、SOX 連兩日止跌後再評估，今日先觀察不進場"
+      "score": "9/12",
+      "entryZone": "開盤 15 分鐘後確認站穩，2,270～2,290",
+      "stopLoss": "2,220（-2.5%）",
+      "reason": "TSM ADR +2.64% 直接對應，AI CoWoS 需求不變，技術面昨日收黑K後今日有望收復。操作定義為一日短線，CPI 前（週三20:30前）考慮出場。",
+      "warnings": [
+        "🟡 週三 6/10 美國 CPI 公布前建議先行獲利了結，不留倉過週三"
+      ]
     },
     {
+      "rank": 2,
       "symbol": "2408.TW",
       "name": "南亞科",
-      "note": "MU 相對 SOX 抗跌（-6.3% vs -10.26%），若 DRAM 族群率先止穩可列底部觀察名單"
+      "score": "9/12",
+      "entryZone": "開盤 15 分鐘後確認不破昨收，伺機進場",
+      "stopLoss": "昨收 -3%",
+      "reason": "MU 單日+9%，R45 DRAM 正向訊號今日最強。三星供給疑慮重燃，南亞科是本地最直接受益廠。今日是本週 DRAM 最佳進場視窗（CPI前）。",
+      "warnings": []
+    },
+    {
+      "rank": 3,
+      "symbol": "2382.TW",
+      "name": "廣達",
+      "score": "7/12",
+      "entryZone": "確認 315 以上站穩後進場",
+      "stopLoss": "昨收 -2%",
+      "reason": "AI 伺服器需求穩健，中東降溫帶動風險偏好恢復。近期相對落後，今日有補漲機會。NVIDIA +2% 帶動 AI 伺服器信心。",
+      "warnings": []
     }
   ],
+  "noTradeReason": null,
+  "watchForRebound": [],
   "portfolioActions": [],
-  "bottomSignals": {
-    "required": [
-      "VIX 回落 < 18（目前 >20）❌",
-      "SOX 連兩日不創新低 ❌",
-      "TSM ADR 出現明確反彈訊號 ❌",
-      "NQ 期指止跌穩住 ⚠️"
-    ],
-    "status": "底部條件全數未達，禁止進場"
+  "weeklyRisk": {
+    "event": "美國 5 月 CPI 數據",
+    "date": "2026-06-10（週三）台灣時間 20:30",
+    "hotScenario": "CPI 偏熱 → 重燃升息恐慌 → 恐出現第二波下跌",
+    "coolScenario": "CPI 偏涼 → 升息疑慮消除 → 多頭續漲",
+    "strategy": "今日進場部位，CPI 公布前（週三盤中）務必先行減碼或出場"
   },
   "keyIndicators": {
-    "SOX":  { "value": -10.26, "label": "費半" },
-    "VIX":  { "value": 20.5,   "label": "VIX" },
-    "TSM":  { "value": -6.69,  "label": "台積電ADR" },
-    "MU":   { "value": -6.30,  "label": "美光MU" },
-    "AVGO": { "value": -14.0,  "label": "博通AVGO" },
-    "NVDA": { "value": -4.50,  "label": "NVIDIA" },
-    "NQ":   { "value": -4.18,  "label": "那指" }
+    "SOX":  { "value": 4.10,  "label": "費半" },
+    "VIX":  { "value": -8.50, "label": "VIX" },
+    "TSM":  { "value": 2.64,  "label": "台積電ADR" },
+    "MU":   { "value": 9.00,  "label": "美光MU" },
+    "NVDA": { "value": 2.00,  "label": "NVIDIA" },
+    "NQ":   { "value": 0.86,  "label": "那斯達克" }
   }
 }
