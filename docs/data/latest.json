@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updatedAt": "2026-06-12T10:05:49.213Z",
+    "updatedAt": "2026-06-12T10:53:05.015Z",
     "dataDate": "20260612",
     "version": "V0014補4"
   },
@@ -115,10 +115,10 @@
       "change": 103.99,
       "changePercent": 11.6596,
       "open": 904.37,
-      "high": 996.75,
+      "high": 996.77,
       "low": 895.5,
       "prevClose": 891.88,
-      "volume": 56323988
+      "volume": 56337333
     },
     {
       "symbol": "SNDK",
@@ -141,7 +141,7 @@
       "change": 4.45,
       "changePercent": 2.22034,
       "open": 201.395,
-      "high": 205.65,
+      "high": 205.66,
       "low": 199.54,
       "prevClose": 200.42,
       "volume": 154038075
@@ -163,9 +163,9 @@
       "symbol": "^VIX",
       "source": "Yahoo",
       "dataDate": "2026-06-12",
-      "price": 18.55,
-      "change": -0.8900013,
-      "changePercent": -4.578196,
+      "price": 19.1,
+      "change": -0.34000015,
+      "changePercent": -1.7480727,
       "open": 19.51,
       "high": 19.56,
       "low": 18.51,
@@ -176,14 +176,14 @@
       "symbol": "NQ=F",
       "source": "Yahoo",
       "dataDate": "2026-06-12",
-      "price": 29650.75,
-      "change": 186,
-      "changePercent": 0.6312628,
+      "price": 29563.75,
+      "change": 99,
+      "changePercent": 0.3359947,
       "open": 29456.75,
-      "high": 29659.25,
+      "high": 29675,
       "low": 29260,
       "prevClose": 29464.75,
-      "volume": 74042
+      "volume": 80835
     }
   ]
 }
