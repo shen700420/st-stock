@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updatedAt": "2026-06-15T06:13:58.580Z",
+    "updatedAt": "2026-06-15T11:57:19.755Z",
     "dataDate": "20260615",
     "version": "V0014補4"
   },
@@ -25,7 +25,7 @@
       "high": 2375,
       "low": 2345,
       "prevClose": 2310,
-      "volume": 25410000
+      "volume": 30228535
     },
     {
       "symbol": "2303.TW",
@@ -38,7 +38,7 @@
       "high": 143.5,
       "low": 137,
       "prevClose": 133.5,
-      "volume": 325586000
+      "volume": 328881762
     },
     {
       "symbol": "2408.TW",
@@ -51,7 +51,7 @@
       "high": 399.5,
       "low": 382,
       "prevClose": 374,
-      "volume": 130155000
+      "volume": 132122225
     },
     {
       "symbol": "2344.TW",
@@ -64,7 +64,7 @@
       "high": 189,
       "low": 175,
       "prevClose": 172,
-      "volume": 226359000
+      "volume": 229481900
     },
     {
       "symbol": "2337.TW",
@@ -77,7 +77,7 @@
       "high": 159,
       "low": 150,
       "prevClose": 146.5,
-      "volume": 26697000
+      "volume": 27844122
     }
   ],
   "globalIndicators": [
@@ -162,13 +162,13 @@
     {
       "symbol": "^VIX",
       "source": "Yahoo",
-      "dataDate": "2026-06-12",
-      "price": 17.68,
-      "change": -1.7600002,
-      "changePercent": -9.053499,
-      "open": 0,
-      "high": 0,
-      "low": 0,
+      "dataDate": "2026-06-15",
+      "price": 16.67,
+      "change": -1.0100002,
+      "changePercent": -5.712671,
+      "open": 16.78,
+      "high": 16.85,
+      "low": 16.64,
       "prevClose": 19.44,
       "volume": 0
     },
@@ -176,14 +176,14 @@
       "symbol": "NQ=F",
       "source": "Yahoo",
       "dataDate": "2026-06-15",
-      "price": 30237.5,
-      "change": 575.5,
-      "changePercent": 1.9401928,
+      "price": 30589,
+      "change": 634.25,
+      "changePercent": 2.1173604,
       "open": 29907,
-      "high": 30246,
-      "low": 29907,
-      "prevClose": 29662,
-      "volume": 29669
+      "high": 30628.25,
+      "low": 30191,
+      "prevClose": 29954.75,
+      "volume": 78495
     }
   ]
 }
