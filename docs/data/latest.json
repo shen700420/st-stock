@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "updatedAt": "2026-06-15T11:57:19.755Z",
+    "updatedAt": "2026-06-15T12:54:23.894Z",
     "dataDate": "20260615",
     "version": "V0014補4"
   },
@@ -29,29 +29,29 @@
     },
     {
       "symbol": "2303.TW",
-      "source": "TWSE",
+      "source": "Yahoo(fallback)",
       "dataDate": "2026-06-15",
       "price": 141.5,
       "change": 8,
-      "changePercent": 5.992509363295881,
+      "changePercent": 5.9925094,
       "open": 139.5,
       "high": 143.5,
       "low": 137,
       "prevClose": 133.5,
-      "volume": 328881762
+      "volume": 328524300
     },
     {
       "symbol": "2408.TW",
-      "source": "TWSE",
+      "source": "Yahoo(fallback)",
       "dataDate": "2026-06-15",
       "price": 395.5,
       "change": 21.5,
-      "changePercent": 5.748663101604278,
+      "changePercent": 5.748663,
       "open": 391,
       "high": 399.5,
       "low": 382,
       "prevClose": 374,
-      "volume": 132122225
+      "volume": 131984310
     },
     {
       "symbol": "2344.TW",
@@ -68,16 +68,16 @@
     },
     {
       "symbol": "2337.TW",
-      "source": "TWSE",
+      "source": "Yahoo(fallback)",
       "dataDate": "2026-06-15",
       "price": 159,
       "change": 12.5,
-      "changePercent": 8.532423208191126,
+      "changePercent": 8.532424,
       "open": 151,
       "high": 159,
       "low": 150,
       "prevClose": 146.5,
-      "volume": 27844122
+      "volume": 27698720
     }
   ],
   "globalIndicators": [
@@ -163,12 +163,12 @@
       "symbol": "^VIX",
       "source": "Yahoo",
       "dataDate": "2026-06-15",
-      "price": 16.67,
-      "change": -1.0100002,
-      "changePercent": -5.712671,
+      "price": 16.56,
+      "change": -1.1200008,
+      "changePercent": -6.3348465,
       "open": 16.78,
       "high": 16.85,
-      "low": 16.64,
+      "low": 16.55,
       "prevClose": 19.44,
       "volume": 0
     },
@@ -176,14 +176,14 @@
       "symbol": "NQ=F",
       "source": "Yahoo",
       "dataDate": "2026-06-15",
-      "price": 30589,
-      "change": 634.25,
-      "changePercent": 2.1173604,
+      "price": 30569.25,
+      "change": 614.5,
+      "changePercent": 2.0514276,
       "open": 29907,
       "high": 30628.25,
       "low": 30191,
       "prevClose": 29954.75,
-      "volume": 78495
+      "volume": 93414
     }
   ]
 }
